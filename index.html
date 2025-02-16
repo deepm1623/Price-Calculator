@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Price Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Chocolate Price Calculator 🍫</h2>
+        <label>Total Cost (₹):</label>
+        <input type="number" id="totalCost" placeholder="Enter total cost">
+
+        <label>Total Weight (grams):</label>
+        <input type="number" id="totalWeight" placeholder="Enter weight in grams">
+
+        <label>Profit Margin (%):</label>
+        <input type="number" id="profitMargin" placeholder="Enter profit margin">
+
+        <button onclick="calculateSellingPrice()">Calculate Selling Price</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateSellingPrice() {
+            let totalCost = parseFloat(document.getElementById("totalCost").value.trim());
+            let totalWeight = parseFloat(document.getElementById("totalWeight").value.trim());
+            let profitMargin = parseFloat(document.getElementById("profitMargin").value.trim());
+
+            if (isNaN(totalCost) || isNaN(totalWeight) || isNaN(profitMargin) || totalCost <= 0 || totalWeight <= 0) {
+                document.getElementById("result").innerText = "Please enter valid positive numbers.";
+                return;
+            }
+
+            let costPerGram = totalCost / totalWeight;
+            let sellingPricePerGram = costPerGram * (1 + profitMargin / 100);
+
+            document.getElementById("result").innerText = `Selling Price per Gram: ₹${sellingPricePerGram.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
